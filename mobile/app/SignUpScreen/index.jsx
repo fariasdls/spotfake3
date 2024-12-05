@@ -47,27 +47,26 @@ const SignUpScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screenContainer}>
-      <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
       <Text style={styles.headerText}>CRIAR CONTA</Text>
 
       <TextInput
         style={styles.inputField}
         placeholder="Nome"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         value={firstName}
         onChangeText={setFirstName}
       />
       <TextInput
         style={styles.inputField}
         placeholder="Sobrenome"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         value={lastName}
         onChangeText={setLastName}
       />
       <TextInput
         style={styles.inputField}
         placeholder="Data de Nascimento (DD/MM/AAAA)"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         keyboardType="numeric"
         value={birthDate}
         onChangeText={setBirthDate}
@@ -75,7 +74,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputField}
         placeholder="Email"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -83,7 +82,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputField}
         placeholder="Senha"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -91,7 +90,7 @@ const SignUpScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputField}
         placeholder="Confirmar Senha"
-        placeholderTextColor="#666"
+        placeholderTextColor="#B0B0B0"
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
@@ -111,48 +110,48 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#101820',
+    backgroundColor: '#2E3A59', // Changed to a darker background color
     padding: 20,
   },
   logo: {
-    width: 130,
-    height: 100,
-    marginBottom: 2,
+    width: 140, // Slightly larger logo
+    height: 110, // Adjusted height
+    marginBottom: 20,
   },
   headerText: {
-    fontSize: 28,
-    fontWeight: '600',
-    color: '#1E90FF',
-    marginBottom: 24,
+    fontSize: 30, // Slightly larger text size
+    fontWeight: '700', // Bold header
+    color: '#FF6347', // Changed to a warm color for better contrast
+    marginBottom: 30, // Increased bottom margin for spacing
   },
   inputField: {
     width: '100%',
-    height: 30,
-    backgroundColor: '#1D1D1D',
-    borderRadius: 10,
+    height: 40, // Slightly taller input fields
+    backgroundColor: '#3E4A59', // Darker background for input fields
+    borderRadius: 12, // Rounded corners
     paddingHorizontal: 16,
-    marginBottom: 16,
-    color: '#E5E5E5',
+    marginBottom: 18, // Increased spacing between input fields
+    color: '#F0F0F0', // Light text color for contrast
   },
   signUpButton: {
     width: '100%',
-    height: 40,
-    backgroundColor: '#1E90FF',
-    borderRadius: 8,
+    height: 45, // Increased button height
+    backgroundColor: '#FF6347', // Changed to a red-orange button color
+    borderRadius: 10, // Rounded corners for the button
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 15, // Increased bottom margin
   },
   signUpButtonText: {
-    fontSize: 16,
+    fontSize: 18, // Larger text on the button
     fontWeight: 'bold',
     color: '#FFFFFF',
   },
   alreadyMemberText: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: '#F0F0F0', // Lighter color for text
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 15, // Increased top margin for spacing
   },
 });
 

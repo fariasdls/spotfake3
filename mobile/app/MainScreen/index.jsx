@@ -47,10 +47,8 @@ const Home = () => {
           <Text style={styles.profileButtonText}>Meu Perfil</Text>
         </TouchableOpacity>
 
-        
         <Text style={styles.header}>ARTISTAS MAIS ESCUTADOS</Text>
 
-        
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.albumContainer}>
           <Pressable onPress={() => navigation.navigate('Album')}>
             <Image source={require('../../assets/images/album1.jpg')} style={styles.image} />
@@ -70,7 +68,6 @@ const Home = () => {
           </View>
         </ScrollView>
 
-        
         <Text style={styles.header}>PRODUTORAS MAIS CONHECIDAS</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.producersContainer}>
           <View style={styles.producerItem}>
@@ -95,10 +92,8 @@ const Home = () => {
           </View>
         </ScrollView>
 
-        
         <Text style={styles.suggestedHeader}>VOCÊ TAMBÉM PODE GOSTAR</Text>
 
-        
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.suggestedAlbums}>
           <Pressable onPress={() => navigation.navigate('Podcast')}>
             <View style={styles.albumItem}>
@@ -123,7 +118,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#141414',
+    backgroundColor: '#0C0C0C',  // Fundo mais escuro para um look mais moderno
   },
   scrollContainer: {
     paddingTop: 20,
@@ -133,27 +128,28 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 40,
     right: 20,
-    backgroundColor: '#1E90FF',
-    padding: 10,
-    borderRadius: 5,
+    backgroundColor: '#800080',  // Cor roxa para destaque
+    padding: 12,
+    borderRadius: 8,
     zIndex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
   },
   profileImage: {
-    width: 20,
-    height: 20,
-    marginRight: 8,
-    borderRadius: 10,
+    width: 22,
+    height: 22,
+    marginRight: 10,
+    borderRadius: 12,
   },
   profileButtonText: {
     color: '#fff',
     fontWeight: 'bold',
+    fontSize: 16,
   },
   header: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 15,
     marginLeft: 10,
@@ -164,19 +160,19 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   image: {
-    width: 90,  
-    height: 90, 
-    marginRight: 15,
-    borderRadius: 8,
+    width: 100,  // Imagem um pouco maior
+    height: 100, 
+    marginRight: 20,
+    borderRadius: 12,  // Bordas mais suaves
   },
   albumName: {
     color: '#fff',
     fontWeight: 'bold',
-    fontSize: 14,
+    fontSize: 16,
     textAlign: 'center',
     marginTop: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#1E90FF',
+    borderBottomWidth: 2,
+    borderBottomColor: '#800080',  // Cor roxa para o destaque no nome do álbum
     paddingBottom: 3,
   },
   producersContainer: {
@@ -186,29 +182,30 @@ const styles = StyleSheet.create({
   },
   producerItem: {
     alignItems: 'center',
-    marginRight: 15,
+    marginRight: 20,
   },
   producerImage: {
-    width: 80,  
-    height: 80, 
-    marginBottom: 5,
+    width: 90,  // Imagem maior das produtoras
+    height: 90,
+    marginBottom: 8,
+    borderRadius: 12,
   },
   producerText: {
     color: '#fff',
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 'bold',
   },
   producerUnderline: {
     borderBottomWidth: 2,
-    borderBottomColor: '#1E90FF',
-    paddingBottom: 5,
+    borderBottomColor: '#800080',
+    paddingBottom: 6,
   },
   suggestedHeader: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
     marginTop: 40,
-    marginBottom: 10,
+    marginBottom: 15,
     marginLeft: 10,
   },
   suggestedAlbums: {
@@ -218,11 +215,11 @@ const styles = StyleSheet.create({
   },
   albumItem: {
     alignItems: 'center',
-    marginRight: 20,
+    marginRight: 25,
   },
   suggestedImage: {
-    width: 80,  
-    height: 80, 
+    width: 85,  // Imagem de sugestão maior
+    height: 85, 
     marginBottom: 10,
     borderRadius: 8,
   },
@@ -231,7 +228,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#1E90FF',
+    borderBottomColor: '#800080',  // Cor roxa para o destaque no nome do álbum
     paddingBottom: 5,
   },
 });

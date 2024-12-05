@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button, Image, SafeAreaView, TextInput, Alert, TouchableOpacity, Modal } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function ProfileScreen() {
   const [name, setName] = useState('');
@@ -10,16 +10,13 @@ export default function ProfileScreen() {
   const [bio, setBio] = useState('');
   const [profileImage, setProfileImage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [isLightTheme, setIsLightTheme] = useState(false);
-  const [modalVisible, setModalVisible] = useState(false)
-  const [novaSenha, setNovaSenha] = useState('')
-  const [confirmarSenha, setConfirmarSenha] = useState('')
-  const [emailValue, setEmailValue] = useState('')
-
-
+  const [isLightTheme, setIsLightTheme] = useState(true); // Default to light theme
+  const [modalVisible, setModalVisible] = useState(false);
+  const [novaSenha, setNovaSenha] = useState('');
+  const [confirmarSenha, setConfirmarSenha] = useState('');
+  const [emailValue, setEmailValue] = useState('');
   const navigation = useNavigation();
 
-  
   const fetchUserData = async () => {
     try {
       const response = await fetch('http://localhost:8000/get.users');
@@ -37,7 +34,6 @@ export default function ProfileScreen() {
   };
 
   useEffect(() => {
-    
     const loadProfileImage = async () => {
       try {
         const savedImage = await AsyncStorage.getItem('profileImage');
@@ -45,18 +41,18 @@ export default function ProfileScreen() {
           setProfileImage(savedImage);
         }
       } catch (error) {
-        console.error("Erro ao carregar a imagem de perfil:", error);
+        console.error('Erro ao carregar a imagem de perfil:', error);
       }
     };
 
     fetchUserData();
-    loadProfileImage();  
+    loadProfileImage();
   }, []);
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (permissionResult.granted === false) {
-      Alert.alert("Permissão necessária", "Permita o acesso à galeria para selecionar uma imagem.");
+      Alert.alert('Permissão necessária', 'Permita o acesso à galeria para selecionar uma imagem.');
       return;
     }
 
@@ -69,7 +65,6 @@ export default function ProfileScreen() {
 
     if (!result.canceled) {
       setProfileImage(result.assets[0].uri);
-      
       await AsyncStorage.setItem('profileImage', result.assets[0].uri);
     }
   };
@@ -85,62 +80,66 @@ export default function ProfileScreen() {
 
   const themeStyles = {
     container: {
-      backgroundColor: isLightTheme ? 'white' : 'black',
+      backgroundColor: isLightTheme ? '#F4F6F9' : '#181818',
     },
     text: {
-      color: isLightTheme ? 'black' : 'white',
+      color: isLightTheme ? '#181818' : '#F4F6F9',
     },
     button: {
-      backgroundColor: isLightTheme ? '#DDDDDD' : '#444',
+      backgroundColor: isLightTheme ? '#6C757D' : '#444',
+    },
+    input: {
+      backgroundColor: isLightTheme ? '#FFFFFF' : '#2C2C2C',
+      color: isLightTheme ? '#181818' : '#F4F6F9',
+    },
+    buttonText: {
+      color: isLightTheme ? '#FFFFFF' : '#000000',
     },
   };
 
   const trocarSenha = () => {
-    if(novaSenha.length < 3 ) {
-      return alert('A senha deve conter pelo menos 3 caractéres')
+    if (novaSenha.length < 3) {
+      return alert('A senha deve conter pelo menos 3 caracteres');
     }
-    if(novaSenha !== confirmarSenha) {
-      return alert('As senhas devem coincidir')
+    if (novaSenha !== confirmarSenha) {
+      return alert('As senhas devem coincidir');
     }
     try {
-      console.log(emailValue)
-      const resposta  = fetch(`http://localhost:8000/trocar_senha/${emailValue}`,{
-    method: 'POST',
-    headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ senha: novaSenha })
-});
-console.log(resposta.status)
-    fecharModal()
+      const resposta = fetch(`http://localhost:8000/trocar_senha/${emailValue}`, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ senha: novaSenha }),
+      });
+      console.log(resposta.status);
+      fecharModal();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    
-  }
+  };
 
   const fecharModal = () => {
-    setConfirmarSenha('')
-    setNovaSenha('')
-    setModalVisible(false)
-  }
+    setConfirmarSenha('');
+    setNovaSenha('');
+    setModalVisible(false);
+  };
 
   const getData = async () => {
     try {
       const value = await AsyncStorage.getItem('email');
       if (value !== null) {
-        setEmailValue(value)
+        setEmailValue(value);
       }
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   };
 
   useEffect(() => {
-    getData()
-  },[])
-
+    getData();
+  }, []);
 
   return (
     <SafeAreaView style={[styles.container, themeStyles.container]}>
@@ -157,7 +156,7 @@ console.log(resposta.status)
           </TouchableOpacity>
           {isEditing ? (
             <TextInput
-              style={[styles.nameInput, themeStyles.text]}
+              style={[styles.nameInput, themeStyles.input, themeStyles.text]}
               value={name}
               onChangeText={(text) => setName(text)}
             />
@@ -170,7 +169,7 @@ console.log(resposta.status)
         <View style={styles.profileBody}>
           {isEditing ? (
             <TextInput
-              style={[styles.bioInput, themeStyles.text]}
+              style={[styles.bioInput, themeStyles.input, themeStyles.text]}
               value={bio}
               onChangeText={(text) => setBio(text)}
               multiline
@@ -180,10 +179,9 @@ console.log(resposta.status)
           )}
         </View>
 
-        
         <View style={styles.buttonContainer}>
           {isEditing ? (
-            <Button title="Salvar" onPress={handleSave} color="#a80000" />
+            <Button title="Salvar" onPress={handleSave} color="#FF5C5C" />
           ) : (
             <Button title="Alterar Biografia" onPress={() => setIsEditing(true)} color="#66FCF1" />
           )}
@@ -199,9 +197,9 @@ console.log(resposta.status)
 
         <View style={styles.buttonContainer}>
           <Button
-            title={isLightTheme ? "Tema Escuro" : "Tema Claro"}
+            title={isLightTheme ? 'Tema Escuro' : 'Tema Claro'}
             onPress={toggleTheme}
-            color={isLightTheme ? "#444" : "#888"}
+            color={isLightTheme ? '#6C757D' : '#444'}
           />
         </View>
 
@@ -209,6 +207,7 @@ console.log(resposta.status)
           <Button title="Sair da Conta" onPress={() => navigation.navigate('Login')} color="#FF6347" />
         </View>
       </View>
+
       <Modal
         animationType="slide"
         transparent={true}
@@ -219,17 +218,17 @@ console.log(resposta.status)
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>trocar senha</Text>
+            <Text style={[styles.modalText, themeStyles.text]}>Trocar senha</Text>
             <TextInput
-              style={styles.inputField}
-              placeholder="nova senha"
+              style={[styles.inputField, themeStyles.input]}
+              placeholder="Nova senha"
               placeholderTextColor="#666"
               value={novaSenha}
               onChangeText={setNovaSenha}
             />
             <TextInput
-              style={styles.inputField}
-              placeholder="confirmar senha"
+              style={[styles.inputField, themeStyles.input]}
+              placeholder="Confirmar senha"
               placeholderTextColor="#666"
               value={confirmarSenha}
               onChangeText={setConfirmarSenha}
@@ -264,103 +263,10 @@ const styles = StyleSheet.create({
     width: 180,
     height: 180,
     borderRadius: 100,
-    marginBottom: 15,
-  },
-  name: {
-    fontSize: 22,
-    fontWeight: 'bold',
-  },
-  nameInput: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    marginBottom: 10,
-  },
-  email: {
-    fontSize: 16,
-  },
-  profileBody: {
-    marginVertical: 10,
-  },
-  bio: {
-    fontSize: 16,
-    lineHeight: 22,
-    textAlign: 'center',
-  },
-  bioInput: {
-    fontSize: 16,
-    lineHeight: 22,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 10,
-    padding: 10,
-    textAlignVertical: 'top',
-  },
-  buttonContainer: {
-    marginVertical: 15,
-    width: '80%',
-    alignSelf: 'center',
   },
   changePhotoButton: {
     marginTop: 10,
-    padding: 10,
-    borderRadius: 11,
-    alignItems: 'center',
-  },
-  changePhotoText: {
-    fontWeight: 'bold',
-  },
-  inputField: {
-    width: '100%',
-    height: 32,
-    backgroundColor: 'black',
-    borderRadius: 10,
-    paddingHorizontal: 16,
-    marginBottom: 16,
-    color: '#E5E5E5',
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.3)'
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: '#212121',
-    borderRadius: 20,
-    padding: 25,
-    paddingHorizontal: 45,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-    color: 'white'
-  },
-  signUpButton: {
-    width: '100%',
-    height: 32,
-    backgroundColor: '#1E90FF',
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  signUpButtonText: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-});
+    paddingVertical: 10,
+    paddingHorizontal:100
+  } 
+})

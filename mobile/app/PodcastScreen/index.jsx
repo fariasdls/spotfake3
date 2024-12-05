@@ -54,7 +54,7 @@ export default function HomeScreen({ navigation }) {
   );
 
   const openModal = (title) => {
-    if (title === 'BadBoys') {
+    if (title === 'Bad Boys') {
       setModalVisible(true);
     }
   };
@@ -65,19 +65,14 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="arrow-back-outline" size={28} color="#fff" />
         </TouchableOpacity>
         <Text style={styles.greeting}>Podcasts</Text>
-        
       </View>
 
-      
       <ScrollView contentContainerStyle={styles.contentContainer}>
-        
-        
         <Text style={styles.sectionTitle}>Continuar Escutando:</Text>
         <FlatList
           data={continueListening}
@@ -88,7 +83,6 @@ export default function HomeScreen({ navigation }) {
           contentContainerStyle={styles.horizontalList}
         />
 
-        
         <Text style={styles.sectionTitle}>Você Pode Gostar:</Text>
         <FlatList
           data={suggested}
@@ -110,7 +104,6 @@ export default function HomeScreen({ navigation }) {
         />
       </ScrollView>
 
-      
       <Modal
         animationType="slide"
         transparent={true}
@@ -119,7 +112,7 @@ export default function HomeScreen({ navigation }) {
       >
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
-            <Text style={styles.modalTitle}>Músicas do Álbum "BadBoys"</Text>
+            <Text style={styles.modalTitle}>Músicas do Álbum "Bad Boys"</Text>
             <FlatList
               data={songs}
               renderItem={renderSuggestedItem}
@@ -136,7 +129,7 @@ export default function HomeScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#121212', 
+    backgroundColor: '#1A1A1A', //
   },
   contentContainer: {
     paddingBottom: 20, 
@@ -149,19 +142,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingTop: 20,
     paddingBottom: 10,
-    backgroundColor: '#121212', 
+    backgroundColor: '#1A1A1A', // 
   },
   greeting: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#fff', 
+    color: '#FFD700', //
     flex: 1, 
     textAlign: 'center', 
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: '#00A9E0', 
+    color: '#32CD32', // 
     marginHorizontal: 16,
     marginBottom: 10,
   },
@@ -175,9 +168,9 @@ const styles = StyleSheet.create({
   playlistImage: {
     width: 120,
     height: 120,
-    borderRadius: 8,
+    borderRadius: 10,
     borderWidth: 2,
-    borderColor: '#00A9E0', 
+    borderColor: '#32CD32', // 
   },
   playlistTitle: {
     color: '#fff',
@@ -188,18 +181,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    backgroundColor: 'rgba(0, 0, 0, 0.8)', // 
   },
   modalContent: {
     width: 300,
     padding: 20,
-    backgroundColor: '#121212',
+    backgroundColor: '#1A1A1A', // 
     borderRadius: 10,
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#00A9E0', 
+    color: '#FFD700', // 
     marginBottom: 10,
   },
 });

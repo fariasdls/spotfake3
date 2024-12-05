@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ScrollView, Modal } from 'react-native';
 import { useNavigation } from '@react-navigation/native';  
 
-const Album = () => {
+const Playlist = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
@@ -63,16 +63,16 @@ const Album = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.albumContainer}>
+      <View style={styles.playlistContainer}>
         <Image 
           source={require('../../assets/images/album1.jpg')} 
           style={styles.albumImage} 
         />
         
-        <Text style={styles.albumTitle}>MC Ryan SP</Text>
-        <Text style={styles.albumArtist}>Cantor</Text>
-        <Text style={styles.albumGenre}>Gênero: Funk</Text>
-        <Text style={styles.albumDuration}>Duração: 32 min</Text>
+        <Text style={styles.playlistTitle}>MC Ryan SP</Text>
+        <Text style={styles.playlistArtist}>Cantor</Text>
+        <Text style={styles.playlistGenre}>Gênero: Funk</Text>
+        <Text style={styles.playlistDuration}>Duração: 32 min</Text>
         
         <TouchableOpacity style={styles.playButton} onPress={openModal}>
           <Text style={styles.playButtonText}>Tocar Música</Text>
@@ -96,10 +96,10 @@ const Album = () => {
               source={tracks[currentTrack].image} 
               style={styles.albumImage} 
             />
-            <Text style={styles.albumTitle}>{tracks[currentTrack].title}</Text>
-            <Text style={styles.albumArtist}>{tracks[currentTrack].artist}</Text>
-            <Text style={styles.albumGenre}>{tracks[currentTrack].album}</Text>
-            <Text style={styles.albumDuration}>Duração: {tracks[currentTrack].duration}</Text>
+            <Text style={styles.playlistTitle}>{tracks[currentTrack].title}</Text>
+            <Text style={styles.playlistArtist}>{tracks[currentTrack].artist}</Text>
+            <Text style={styles.playlistGenre}>{tracks[currentTrack].album}</Text>
+            <Text style={styles.playlistDuration}>Duração: {tracks[currentTrack].duration}</Text>
             
             <View style={styles.controls}>
               <TouchableOpacity onPress={prevTrack} style={styles.controlButton}>
@@ -142,10 +142,10 @@ const Album = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    backgroundColor: '#121212',
+    backgroundColor: '#1A1A1A',  // Fundo escuro suave para uma aparência moderna
     paddingBottom: 30,
   },
-  albumContainer: {
+  playlistContainer: {  // Container principal da playlist
     alignItems: 'center',
     marginTop: 40,
   },
@@ -155,29 +155,29 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginBottom: 20,
   },
-  albumTitle: {
-    color: '#fff',
-    fontSize: 24,
+  playlistTitle: {  // Título da playlist
+    color: '#FF5733',  // Cor laranja vibrante para o título
+    fontSize: 26,
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  albumArtist: {
-    color: '#bbb',
+  playlistArtist: {  // Artista da playlist
+    color: '#C0C0C0',  // Cor cinza claro para o artista
     fontSize: 18,
     marginBottom: 5,
   },
-  albumGenre: {
-    color: '#bbb',
+  playlistGenre: {  // Gênero musical
+    color: '#C0C0C0',
     fontSize: 16,
     marginBottom: 5,
   },
-  albumDuration: {
-    color: '#bbb',
+  playlistDuration: {  // Duração da música
+    color: '#C0C0C0',
     fontSize: 16,
     marginBottom: 20,
   },
   playButton: {
-    backgroundColor: '#1E90FF',
+    backgroundColor: '#FF5733',  // Botão de toque em laranja vibrante
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 25,
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   homeButton: {
-    backgroundColor: '#1E90FF',  
+    backgroundColor: '#4CAF50',  // Cor verde para o botão de voltar
     paddingVertical: 12,
     paddingHorizontal: 40,
     borderRadius: 25,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   relatedTitle: {
-    color: '#fff',
+    color: '#FF5733',
     fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 20,
@@ -242,12 +242,12 @@ const styles = StyleSheet.create({
   modalContent: {
     width: 300,
     padding: 20,
-    backgroundColor: '#121212',
+    backgroundColor: '#1A1A1A',
     borderRadius: 10,
     alignItems: 'center',
   },
   closeButton: {
-    backgroundColor: '#1E90FF',
+    backgroundColor: '#4CAF50',  // Verde para o botão de fechar
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 25,
@@ -256,8 +256,7 @@ const styles = StyleSheet.create({
   closeButtonText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
   },
 });
 
-export default Album;
+export default Playlist;

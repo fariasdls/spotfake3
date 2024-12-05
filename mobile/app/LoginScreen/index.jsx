@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
         alert('ERRO: Senha incorreta!');
         return;
       } else if (response.status === 200) {
-        storeData(email)
+        storeData(email);
         navigation.navigate('Home');
       } else {
         alert('ERRO: Resposta desconhecida do servidor');
@@ -47,21 +47,17 @@ const LoginScreen = ({ navigation }) => {
       console.log(value)
       await AsyncStorage.setItem('email', value);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
   };
 
   return (
     <View style={styles.screenContainer}>
-      
-      <Image source={require('../../assets/images/logo.png')} style={styles.logo} />
-      
-      <Text style={styles.heading}>Acessar Conta</Text>
-      
+    <Text style={styles.heading}>Acessar Conta</Text>
       <TextInput
         style={styles.inputField}
         placeholder="Digite seu email"
-        placeholderTextColor="#666"
+        placeholderTextColor="#999"
         keyboardType="email-address"
         value={email}
         onChangeText={setEmail}
@@ -69,7 +65,7 @@ const LoginScreen = ({ navigation }) => {
       <TextInput
         style={styles.inputField}
         placeholder="Digite sua senha"
-        placeholderTextColor="#666"
+        placeholderTextColor="#999"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
@@ -89,8 +85,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#101820',
-    padding: 20,
+    backgroundColor: '#232323',  // Fundo mais escuro para um look moderno
+    padding: 25,
   },
   logo: {
     width: 150, 
@@ -98,28 +94,29 @@ const styles = StyleSheet.create({
     marginBottom: 30, 
   },
   heading: {
-    fontSize: 28,
-    fontWeight: '600',
-    color: '#1E90FF', 
-    marginBottom: 20,
+    fontSize: 30,
+    fontWeight: '700',  // Título mais forte
+    color: '#FF6347',  // Cor de destaque (tom de vermelho)
+    marginBottom: 25,
   },
   inputField: {
     width: '100%',
-    height: 48,
-    backgroundColor: '#1D1D1D',
-    borderRadius: 10,
+    height: 50,
+    backgroundColor: '#333',  // Fundo escuro para o campo
+    borderRadius: 12,
     paddingHorizontal: 15,
-    marginBottom: 18,
-    color: '#E5E5E5',
+    marginBottom: 20,
+    color: '#EAEAEA',  // Texto claro
+    fontSize: 16,
   },
   loginButton: {
     width: '100%',
-    height: 48,
-    backgroundColor: '#1E90FF',
-    borderRadius: 10,
+    height: 50,
+    backgroundColor: '#FF6347',  // Botão de login com cor de destaque
+    borderRadius: 12,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
   },
   loginButtonText: {
     fontSize: 18,
@@ -128,8 +125,9 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     fontSize: 16,
-    color: '#1E90FF',
+    color: '#FF6347',  // Cor de destaque no texto de cadastro
     textAlign: 'center',
+    marginTop: 10,
   },
 });
 
